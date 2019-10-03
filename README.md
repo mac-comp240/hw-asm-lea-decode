@@ -23,13 +23,12 @@ If your C source code is correct, the pertinent portion of the file called
 decode:
 .LFB0:
 	.cfi_startproc
-	leaq	(%rsi,%rsi,8), %rax
-	movq	%rdi, %rdx
-	salq	$4, %rdx
-	negq	%rdx
-	addq	%rdi, %rdx
-	addq	%rdx, %rax
-	ret
+	leaq    (%rsi,%rsi,8), %rax
+        movq    %rdi, %rdx
+        salq    $4, %rdx
+        subq    %rdx, %rdi
+        addq    %rdi, %rax
+        ret
 	.cfi_endproc
 ```
 
@@ -60,7 +59,7 @@ create a correct function that contains only one line of code in its code block
 
 Doing the following will check the difference between 2 files:
 
-    diff lea_decode.s lea_decode_correct.s
+    diff -I '*.ident' lea_decode.s lea_decode_correct.s
 
 Do this on the terminal to find out more:
 
