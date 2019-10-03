@@ -59,7 +59,7 @@ create a correct function that contains only one line of code in its code block
 
 Doing the following will check the difference between 2 files:
 
-    diff -I '*.ident' lea_decode.s lea_decode_correct.s
+    diff -I '.ident*' lea_decode.s lea_decode_correct.s
 
 Do this on the terminal to find out more:
 
