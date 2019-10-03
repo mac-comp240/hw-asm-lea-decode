@@ -7,7 +7,7 @@ lea_decode.s: lea_decode.c
 	${CC} ${CFLAGS} lea_decode.c
 
 compare:
-	diff -I '.ident*' lea_decode.s lea_decode_correct.s
+	diff -I -b '.ident*' lea_decode.s lea_decode_correct.s
 
 clean:
 	rm lea_decode.s
