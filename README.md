@@ -3,12 +3,9 @@
 For this assignment, you are given an assembly code file, and you must work
 backwards from the assembly code to create the corresponding C source file.
 
-Compiler writers often rely on the `leaq` instruction for different types of
-math, as they allow computers to avoid using the more computationally expensive
-multiplication operator.
+Compiler writers often rely on the `leaq` instruction for different types of math, as they allow computers to avoid using the more computationally expensive multiplication operator.
 
-This problem is similar to but slightly more complicated than those found in
-section 3.5.1 of your text.
+This problem is similar to but slightly more complicated than those found in section 3.5.1 of your text.
 
 ## Problem Definition
 
@@ -22,19 +19,19 @@ If your C source code is correct, the pertinent portion of the file called
 ```Assembly
 decode:
 .LFB0:
-	.cfi_startproc
-	leaq    (%rsi,%rsi,8), %rax
-        movq    %rdi, %rdx
-        salq    $4, %rdx
+        .cfi_startproc
+        leaq    0(,%rsi,8), %rdx
+        subq    %rsi, %rdx
+        leaq    0(,%rdx,8), %rax
+        leaq    0(,%rdi,4), %rdx
         subq    %rdx, %rdi
+        salq    $4, %rdi
         addq    %rdi, %rax
         ret
-	.cfi_endproc
+        .cfi_endproc
 ```
 
-The complete correct assembly file is in the file lea_decode_correct.s. You can
-use the Makefile to create lea_decode.s once you have created an lea_decode.c
-with code in it.
+The complete correct assembly file is in the file lea_decode_correct.s. You can use the Makefile to create lea_decode.s once you have created an lea_decode.c with code in it.
 
 ## Expectations for Code
 
@@ -50,12 +47,7 @@ place to store values needed for the computation.
 
 There are no shift operators in the original code.
 
-*You cannot directly translate line by line into the C code* from the assembly
-code for most of this example. Try to think about how some of the assembly could
-be combined into compact expressions in C, using only arithmetic operations and
-constants. Though your answer can contain a few lines of code, it is possible to
-create a correct function that contains only one line of code in its code block
-(within the {}).
+*You cannot directly translate line by line into the C code* from the assembly code for most of this example. Try to think about how some of the assembly could be combined into compact expressions in C, using only arithmetic operations and constants. Though your answer can contain a few lines of code, it is possible to create a correct function that contains only one line of code in its code block (within the {}).
 
 Doing the following will check the difference between 2 files:
 
@@ -69,9 +61,4 @@ The makefile has this built into it, so that you can do this after you have done
 
     make compare
 	
-When you have everything correct, you will get nothing returned when you type
-the above `make compare` command. If there are errors, you will see output that
-attempts to tell you where the files are different. Lines with a < in front of
-them are from your file and lines with a > in front of them are corresponding
-lines in the correct complete version. The graders will use this to verify the
-correctness of your solution.
+When you have everything correct, you will get nothing returned when you type the above `make compare` command. If there are errors, you will see output that attempts to tell you where the files are different. Lines with a < in front of them are from your file and lines with a > in front of them are corresponding lines in the correct complete version. The graders will use this to verify the correctness of your solution.
