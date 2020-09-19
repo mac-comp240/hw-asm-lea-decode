@@ -19,19 +19,23 @@ If your C source code is correct, the pertinent portion of the file called
 ```Assembly
 decode:
 .LFB0:
-        .cfi_startproc
-        leaq    0(,%rsi,8), %rdx
-        subq    %rsi, %rdx
-        leaq    0(,%rdx,8), %rax
-        leaq    0(,%rdi,4), %rdx
-        subq    %rdx, %rdi
-        salq    $4, %rdi
-        addq    %rdi, %rax
-        ret
-        .cfi_endproc
+	.cfi_startproc
+	movq	%rsi, %rdx
+	salq	$4, %rdx
+	subq	%rsi, %rdx
+	leaq	0(,%rdx,4), %rax
+	leaq	0(,%rdi,8), %rdx
+	subq	%rdx, %rdi
+	addq	%rdi, %rax
+	ret
+	.cfi_endproc
 ```
 
-The complete correct assembly file is in the file lea_decode_correct.s. You can use the Makefile to create lea_decode.s once you have created an lea_decode.c with code in it.
+The complete correct assembly file is in the file lea_decode_correct.s. You can use the Makefile to create lea_decode.s once you have created an lea_decode.c with code in it. **You can also use the make command to check if your lea_decode.c file has created the propers lea_decode.s file by doing this:**
+
+    make compare
+
+See below in important notes for some more details about this.
 
 ## Expectations for Code
 
@@ -61,4 +65,9 @@ The makefile has this built into it, so that you can do this after you have done
 
     make compare
 	
-When you have everything correct, you will get nothing returned when you type the above `make compare` command. If there are errors, you will see output that attempts to tell you where the files are different. Lines with a < in front of them are from your file and lines with a > in front of them are corresponding lines in the correct complete version. The graders will use this to verify the correctness of your solution.
+When you have everything correct, when you type the above `make compare` command, he diff command that runs will appear and return with no output. It will run like this:
+
+    $ make compare
+    diff -b -B -I '.file*' -I '.ident*' lea_decode.s lea_decode_correct.s
+
+If there are errors, you will see output that attempts to tell you where the files are different. Lines with a < in front of them are from your file and lines with a > in front of them are corresponding lines in the correct complete version. The graders will use this to verify the correctness of your solution.
