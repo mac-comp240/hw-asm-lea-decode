@@ -5,13 +5,11 @@
 decode:
 .LFB0:
 	.cfi_startproc
-	movq	%rsi, %rdx
-	salq	$4, %rdx
-	subq	%rsi, %rdx
-	leaq	0(,%rdx,4), %rax
-	leaq	0(,%rdi,8), %rdx
-	subq	%rdx, %rdi
-	addq	%rdi, %rax
+	leaq	(%rsi,%rsi,8), %rax
+	leaq	(%rax,%rax,8), %rax
+	leaq	(%rdi,%rdi,4), %rcx
+	leaq	0(,%rcx,8), %rdx
+	addq	%rdx, %rax
 	ret
 	.cfi_endproc
 .LFE0:
