@@ -31,7 +31,11 @@ No extensive testing needed here--just devise the C code that compiles to the ab
 
 ## Important Notes
 
-*You cannot directly translate line by line into the C code* from the assembly code for most of this example. Try to think about how some of the assembly could be combined into compact expressions in C, using only arithmetic operations and constants. Though your answer can contain a few lines of code, it is possible to create a correct function that contains only one line of code in its code block (within the {}).
+*You **should not** directly translate line by line into the C code* from the
+assembly code for most of this example. Try to think about how some of the
+assembly could be combined into compact expressions in C, using only arithmetic
+operations and constants. Your answer should have simplified arithmetic
+expressions and be only a few lines of C code.
 
 
 Doing the following will check the difference between 2 files:
