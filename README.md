@@ -29,7 +29,7 @@ This example is very simple, so the only thing that you need to do is comment yo
 
 No extensive testing needed here--just devise the C code that compiles to the above assembly.
 
-## Important Notes
+## Important Note
 
 *You **should not** directly translate line by line into the C code* from the
 assembly code for most of this example. Try to think about how some of the
@@ -37,6 +37,7 @@ assembly could be combined into compact expressions in C, using only arithmetic
 operations and constants. Your answer should have simplified arithmetic
 expressions and be only a few lines of C code.
 
+## Comparing Your Solution
 
 Doing the following will check the difference between 2 files:
 
